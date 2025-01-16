@@ -1,0 +1,96 @@
+.promo-banner-blue-v1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #192C7C, #2E50E2);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 90px;
+  padding: 15px 20px;
+}
+
+.container-text-blue p {
+  font-family: 'Lora';
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 33.28px;
+  color: #fff;
+  text-align: center;
+  padding: 0 28px;
+}
+
+.container-text-blue p span {
+  font-weight: 700;
+  font-style: italic;
+  color: #F8A022;
+}
+
+.container-buttons-blue {
+  display: flex;
+  gap: 12.11px;
+}
+
+.container-buttons-blue button {
+  padding: 9.99px 26.63px;
+  border-radius: 41.61px;
+  border: none;
+  font-family: 'Red Hat Display';
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 26.63px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.container-buttons-blue button:hover {
+    background-color: #E47300;
+    border-color: #E47300;
+}
+
+.container-buttons-blue .create-account-blue {
+  background-color: #F68A1B;
+  border: 2px solid #F68A1B;
+  color: #fff;
+}
+
+.container-buttons-blue .login-blue {
+  border: 2px solid #F68A1B;
+  color: #F68A1B;
+  background-color: #fff;
+}
+
+.close-banner-blue-v1 {
+  position: absolute;
+  top: 0px;
+  right: 0%;
+  background: transparent !important;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    .promo-banner-blue-v1 {
+        gap: 8px;
+        padding: 15px 20px;
+    }
+    
+}
+@media screen and (max-width: 767px) {
+    .container-buttons-blue .create-account-blue, .container-buttons-blue .login-blue {
+        max-width: 190px;
+        padding: 1px 13px;
+        font-size: 11px;
+        line-height: 26.63px;
+    }
+    .container-text-blue p {
+        font-size: 15px;
+        line-height: 17px;
+    }
+    .close-banner-blue-v1 {
+        right: -1%;
+    }
+}

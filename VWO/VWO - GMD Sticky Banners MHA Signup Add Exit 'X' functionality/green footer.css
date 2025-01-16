@@ -1,0 +1,105 @@
+.promo-banner-green-v2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #D5EB6A;
+  min-height: 90px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 90px;
+  padding: 15px 20px;
+  position: fixed;
+  bottom: 0; /* Stick to the bottom of the page */
+  left: 0; /* Make sure it spans the full width */
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.container-text-green p {
+  font-family: 'Lora';
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 33.28px;
+  color: #192C7C;
+  text-align: center;
+  padding: 0 28px;
+}
+
+.container-text-green p span {
+  font-weight: 700;
+  font-style: italic;
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 0 5px 0;
+  line-height: 0.3;
+}
+
+.container-buttons-green {
+  display: flex;
+  gap: 12.11px;
+}
+
+.container-buttons-green button {
+  padding: 9.99px 26.63px;
+  border-radius: 41.61px;
+  border: none;
+  font-family: 'Red Hat Display';
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 26.63px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.container-buttons-green button:hover {
+    background-color: #E47300;
+    border-color: #E47300;
+}
+
+.container-buttons-green .create-account-green {
+  background-color: #F68A1B;
+  border: 2px solid #F68A1B;
+  color: #fff;
+}
+
+.container-buttons-green .login-green {
+  border: 2px solid #F68A1B;
+  color: #F68A1B;
+  background-color: #fff;
+}
+
+.close-banner-green-v2 {
+  position: absolute;
+  top: 10px;
+  right: 1%;
+  background: transparent !important;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    .promo-banner-green-v2 {
+        gap: 8px;
+        padding: 15px 20px;
+    }
+    
+}
+@media screen and (max-width: 767px) {
+    .container-buttons-green .create-account-green, .container-buttons-green .login-green {
+        max-width: 190px;
+        padding: 1px 13px;
+        font-size: 11px;
+        line-height: 26.63px;
+    }
+    .container-text-green p {
+        font-size: 15px;
+        line-height: 17px;
+    }
+    .close-banner-green-v2 {
+        right: -1%;
+    }
+}
