@@ -406,3 +406,307 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, delayThreshold);
 });
+
+
+
+
+// Cross browser functionality - VWO current
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('[Exit Intent Popup]: Script loaded.');
+
+    let exitIntentTriggered = false; // Track if the popup has already been triggered
+    let idleTimer = null; // Timer for idle time tracking (mobile)
+    let idleTime = 0; // Idle time counter (mobile)
+    const idleThreshold = 240; // 4 minutes in seconds
+    const delayThreshold = 30000; // 30 seconds in milliseconds
+    const popupID = 37817; // Replace with your popup ID
+    let hasScrolledDown = false; // Track if the user has scrolled down (mobile)
+
+    // 2-Day Interval Logic
+    const dismissKey = 'popupDismissedAt'; // Key for storing dismissal timestamp
+    const intervalInDays = 2; // 2-day interval
+    const intervalInMs = intervalInDays * 24 * 60 * 60 * 1000; // Convert to milliseconds
+
+    // Function to detect mobile devices
+    function isMobileDevice() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || screen.width <= 1025;
+    }
+
+    // Log whether a mobile device is detected
+    if (isMobileDevice()) {
+        console.log('[Exit Intent Popup]: Mobile device detected.');
+    } else {
+        console.log('[Exit Intent Popup]: Non-mobile device detected.');
+    }
+
+    // Function to check if the popup can be displayed (2-day interval logic)
+    function canDisplayPopup() {
+        try {
+            const lastDismissedAt = localStorage.getItem(dismissKey);
+            if (!lastDismissedAt) {
+                // No dismissal timestamp stored, allow the popup
+                return true;
+            }
+            const timeElapsed = Date.now() - new Date(lastDismissedAt).getTime();
+            return timeElapsed >= intervalInMs; // Return true if 2 days have passed
+        } catch (error) {
+            console.warn('LocalStorage is not accessible:', error);
+            return true; // Allow popup as a fallback
+        }
+    }
+
+    // Function to mark the popup as dismissed
+    function markPopupAsDismissed() {
+        try {
+            localStorage.setItem(dismissKey, new Date().toISOString());
+            console.log(`[Exit Intent Popup]: Popup dismissed at ${new Date().toISOString()}`);
+        } catch (error) {
+            console.warn('Unable to store dismissal timestamp:', error);
+        }
+    }
+
+    // Function to check if the popup has already been shown in this session
+    function hasPopupShown() {
+        return sessionStorage.getItem('popupShown') === 'true';
+    }
+
+    // Function to mark the popup as shown
+    function markPopupAsShown() {
+        sessionStorage.setItem('popupShown', 'true');
+    }
+
+    // Function to log messages for debugging
+    function logMessage(message) {
+        console.log(`[Exit Intent Popup]: ${message}`);
+    }
+
+    // Function to trigger the popup
+    function triggerPopup() {
+        if (!exitIntentTriggered && !hasPopupShown() && canDisplayPopup()) {
+            exitIntentTriggered = true;
+            try {
+                if (typeof elementorProFrontend === 'undefined' || !elementorProFrontend.modules.popup) {
+                    throw new Error('Elementor popup module is not loaded.');
+                }
+
+                elementorProFrontend.modules.popup.showPopup({ id: popupID });
+                logMessage(`Popup with ID ${popupID} triggered.`);
+                markPopupAsShown();
+
+                // Mark the popup as dismissed when closed
+                document.addEventListener('click', function (event) {
+                    if (
+                        event.target.classList.contains('elementor-popup-modal-close') || // Close button
+                        event.target.classList.contains('elementor-popup-modal') // Overlay
+                    ) {
+                        markPopupAsDismissed();
+                    }
+                });
+            } catch (error) {
+                console.error(`[Exit Intent Popup Error]: ${error.message}`);
+            }
+        } else {
+            logMessage('[Exit Intent Popup]: Popup cannot be displayed due to 2-day interval.');
+        }
+    }
+
+    // Desktop Exit Intent Logic
+    function desktopExitIntent() {
+        logMessage('Desktop exit intent logic enabled.');
+        document.addEventListener('mouseout', function (event) {
+            if (!exitIntentTriggered && event.clientY < 0 && !event.relatedTarget) {
+                logMessage('Exit intent detected on desktop.');
+                triggerPopup();
+            }
+        });
+    }
+
+    // Mobile Scroll-Up Trigger Logic
+    function mobileScrollUpTrigger() {
+        logMessage('Mobile scroll-up trigger enabled.');
+    
+        let lastScrollPosition = 0; // Keep track of the last scroll position
+    
+        window.addEventListener(
+            'scroll',
+            function () {
+                const currentScrollPosition = window.scrollY;
+    
+                // If the user scrolls down, mark as "hasScrolledDown"
+                if (currentScrollPosition > 50 && !hasScrolledDown) {
+                    hasScrolledDown = true;
+                    logMessage('User has scrolled down on mobile.');
+                }
+    
+                // If the user scrolls up (current position < last position) after scrolling down, trigger popup
+                if (hasScrolledDown && currentScrollPosition < lastScrollPosition) {
+                    logMessage('User started scrolling up after scrolling down.');
+                    triggerPopup();
+                }
+    
+                // Update the last scroll position
+                lastScrollPosition = currentScrollPosition;
+            },
+            { passive: true } // Use passive listeners for better performance
+        );
+    }    
+
+    // Initialize Exit Intent Logic After Delay
+    setTimeout(function () {
+        logMessage('30 seconds delay completed.');
+        if (isMobileDevice()) {
+            mobileScrollUpTrigger(); // Enable mobile-specific scroll-up behavior
+        } else {
+            desktopExitIntent(); // Enable desktop-specific behavior
+        }
+    }, delayThreshold);
+});
+
+
+
+
+window.onload = function () {
+    console.log('[Exit Intent Popup]: Script loaded.');
+
+    let exitIntentTriggered = false; // Track if the popup has already been triggered
+    let idleTimer = null; // Timer for idle time tracking (mobile)
+    let idleTime = 0; // Idle time counter (mobile)
+    const idleThreshold = 240; // 4 minutes in seconds
+    const delayThreshold = 30000; // 30 seconds in milliseconds
+    const popupID = 37817; // Replace with your popup ID
+    let hasScrolledDown = false; // Track if the user has scrolled down (mobile)
+
+    // 2-Day Interval Logic
+    const dismissKey = 'popupDismissedAt'; // Key for storing dismissal timestamp
+    const intervalInDays = 2; // 2-day interval
+    const intervalInMs = intervalInDays * 24 * 60 * 60 * 1000; // Convert to milliseconds
+
+    // Function to detect mobile devices
+    function isMobileDevice() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || screen.width <= 1025;
+    }
+
+    // Log whether a mobile device is detected
+    if (isMobileDevice()) {
+        console.log('[Exit Intent Popup]: Mobile device detected.');
+    } else {
+        console.log('[Exit Intent Popup]: Non-mobile device detected.');
+    }
+
+    // Function to check if the popup can be displayed (2-day interval logic)
+    function canDisplayPopup() {
+        try {
+            const lastDismissedAt = localStorage.getItem(dismissKey);
+            if (!lastDismissedAt) {
+                // No dismissal timestamp stored, allow the popup
+                return true;
+            }
+            const timeElapsed = Date.now() - new Date(lastDismissedAt).getTime();
+            return timeElapsed >= intervalInMs; // Return true if 2 days have passed
+        } catch (error) {
+            console.warn('LocalStorage is not accessible:', error);
+            return true; // Allow popup as a fallback
+        }
+    }
+
+    // Function to mark the popup as dismissed
+    function markPopupAsDismissed() {
+        try {
+            localStorage.setItem(dismissKey, new Date().toISOString());
+            console.log(`[Exit Intent Popup]: Popup dismissed at ${new Date().toISOString()}`);
+        } catch (error) {
+            console.warn('Unable to store dismissal timestamp:', error);
+        }
+    }
+
+    // Function to check if the popup has already been shown in this session
+    function hasPopupShown() {
+        return sessionStorage.getItem('popupShown') === 'true';
+    }
+
+    // Function to mark the popup as shown
+    function markPopupAsShown() {
+        sessionStorage.setItem('popupShown', 'true');
+    }
+
+    // Function to log messages for debugging
+    function logMessage(message) {
+        console.log(`[Exit Intent Popup]: ${message}`);
+    }
+
+    // Function to trigger the popup
+    function triggerPopup() {
+        if (!exitIntentTriggered && !hasPopupShown() && canDisplayPopup()) {
+            exitIntentTriggered = true;
+            try {
+                if (typeof elementorProFrontend === 'undefined' || !elementorProFrontend.modules.popup) {
+                    throw new Error('Elementor popup module is not loaded.');
+                }
+
+                elementorProFrontend.modules.popup.showPopup({ id: popupID });
+                logMessage(`Popup with ID ${popupID} triggered.`);
+                markPopupAsShown();
+
+                // Mark the popup as dismissed when closed
+                document.addEventListener('click', function (event) {
+                    if (
+                        event.target.classList.contains('elementor-popup-modal-close') || // Close button
+                        event.target.classList.contains('elementor-popup-modal') // Overlay
+                    ) {
+                        markPopupAsDismissed();
+                    }
+                });
+            } catch (error) {
+                console.error(`[Exit Intent Popup Error]: ${error.message}`);
+            }
+        } else {
+            logMessage('[Exit Intent Popup]: Popup cannot be displayed due to 2-day interval.');
+        }
+    }
+
+    // Desktop Exit Intent Logic
+    function desktopExitIntent() {
+        logMessage('Desktop exit intent logic enabled.');
+        document.addEventListener('mouseout', function (event) {
+            if (!exitIntentTriggered && event.clientY < 0 && !event.relatedTarget) {
+                logMessage('Exit intent detected on desktop.');
+                triggerPopup();
+            }
+        });
+    }
+
+    // Mobile Scroll-Up Trigger Logic
+    function mobileScrollUpTrigger() {
+        logMessage('Mobile scroll-up trigger enabled.');
+        window.addEventListener(
+            'scroll',
+            function () {
+                const scrollPosition = window.scrollY;
+
+                // If user scrolls down, mark it as "hasScrolledDown"
+                if (scrollPosition > 50 && !hasScrolledDown) {
+                    hasScrolledDown = true;
+                    logMessage('User has scrolled down on mobile.');
+                }
+
+                // If user scrolls back up after scrolling down, trigger popup
+                if (hasScrolledDown && scrollPosition < 10) {
+                    logMessage('User scrolled back up after scrolling down.');
+                    triggerPopup();
+                }
+            },
+            { passive: true } // Use passive listeners for better performance
+        );
+    }
+
+    // Initialize Exit Intent Logic After Delay
+    setTimeout(function () {
+        logMessage('30 seconds delay completed.');
+        if (isMobileDevice()) {
+            mobileScrollUpTrigger(); // Enable mobile-specific scroll-up behavior
+        } else {
+            desktopExitIntent(); // Enable desktop-specific behavior
+        }
+    }, delayThreshold);
+};
