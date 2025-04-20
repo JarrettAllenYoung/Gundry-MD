@@ -1,0 +1,85 @@
+/* FAQ ACCORDION TOGGLE */
+
+/* 1) Base container gets the blue border & rounded corners */
+.accordion {
+  border: 2px solid #2945B8;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: border-color .25s ease;
+}
+
+/* 2) Title styling */
+.accordion__title {
+  display: block;
+  padding: 14px 30px;
+  color: #2945B8;
+  font-weight: 600;
+  font-size: 16;
+  font-family: 'Red Hat Text';
+  text-transform: normal;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 3) Plus/minus icon via pseudo */
+.accordion__title::after {
+  content: "+";
+  float: right;
+  font-size: 1.5em;
+  font-weight: 100;
+  font-family: inherit;
+  float: right;
+  margin-top: -7px;
+  transition: transform .25s ease;
+}
+
+/* 4) Content panel is hidden by default */
+.accordion__text {
+  max-height: 0;
+  overflow: hidden;
+  color: #13161D;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Red Hat Text';
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .5s ease;
+}
+
+.accordion__info p {
+  margin-bottom: 16px;
+}
+
+/* 5) When checked, expand the panel */
+.accordion:has(input:checked) .accordion__text {
+  clip-path: inset(0 0 0 0);
+  max-height: 1440px;
+  padding: 30px 65px;
+}
+
+/* 6) Change the icon and container styling when open */
+.accordion:has(input:checked) .accordion__title::after {
+  content: "–";
+}
+
+.accordion:has(input:checked) {
+  border-color: #2945B8;
+}
+
+/* 7) Hide the native checkbox */
+.accordion input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 8) Media Queries */
+@media screen and (max-width: 767px) {
+  .accordion__title {
+    padding: 20px;
+  }
+  .accordion:has(input:checked) .accordion__text {
+    padding: 10px 10px 20px;
+  }
+}

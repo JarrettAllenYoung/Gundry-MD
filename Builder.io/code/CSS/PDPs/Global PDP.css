@@ -1,0 +1,453 @@
+/*
+* Custom CSS styles
+*
+* Global by default, but use `&` to scope to just this content, e.g.
+*
+*   & .foo {
+*     color: 'red'
+*   }
+*/
+
+
+/* FAQ ACCORDION TOGGLE */
+
+/* 1) Base container gets the blue border & rounded corners */
+.accordion {
+  border: 2px solid #2945B8;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: border-color .25s ease;
+}
+
+/* 2) Title styling */
+.accordion__title {
+  display: block;
+  padding: 14px 30px;
+  color: #2945B8;
+  font-weight: 600;
+  font-size: 16;
+  font-family: 'Red Hat Text';
+  text-transform: normal;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 3) Plus/minus icon via pseudo */
+.accordion__title::after {
+  content: "+";
+  float: right;
+  font-size: 1.5em;
+  font-weight: 100;
+  font-family: inherit;
+  float: right;
+  margin-top: -7px;
+  transition: transform .25s ease;
+}
+
+/* 4) Content panel is hidden by default */
+.accordion__text {
+  max-height: 0;
+  overflow: hidden;
+  color: #13161D;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Red Hat Text';
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .5s ease;
+}
+
+.accordion__info p {
+  margin-bottom: 16px;
+}
+
+/* 5) When checked, expand the panel */
+.accordion:has(input:checked) .accordion__text {
+  clip-path: inset(0 0 0 0);
+  max-height: 1440px;
+  padding: 30px 65px;
+}
+
+/* 6) Change the icon and container styling when open */
+.accordion:has(input:checked) .accordion__title::after {
+  content: "–";
+}
+
+.accordion:has(input:checked) {
+  border-color: #2945B8;
+}
+
+/* 7) Hide the native checkbox */
+.accordion input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 8) Media Query */
+@media screen and (max-width: 767px) {
+  .accordion:has(input:checked) .accordion__text {
+    padding: 16px 30px 30px 30px;
+  }
+}
+
+/* END FAQ ACCORDION TOGGLE */
+
+
+/* POPUP MODAL */
+
+/* hide the scrollbar and prevent scrolling */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Base paragraph styles */
+p.modal-content-text {
+  margin: 4em auto;
+  font-size: 16px;
+  line-height: 24px;
+  color: #13161D;
+  font-family: 'Red Hat Text';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media only screen and (min-width: 768px) {
+p.modal-content-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* -------------------------------- 
+ *
+ * Modal Window
+ *
+ * -------------------------------- */
+
+.morph-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  color: white;
+  z-index: 2000;
+}
+
+.morph-modal.open-modal {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2000;
+}
+
+.modal-content,
+.close-modal {
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.modal-visible .modal-content,
+.modal-visible .close-modal {
+  opacity: 1;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  position: relative;
+  overflow: auto;
+  padding: 10%;
+  color: #14161D;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  /* replace text with image */
+  height: 56px;
+  width: 56px;
+  background: #2945B8;
+  border-radius: 50%;
+  border: none;
+  text-indent: 100%;
+  overflow: hidden;
+  color: transparent;
+  white-space: nowrap;
+  transition: background 0.2s;
+  z-index: 3;
+}
+
+.close-modal::before,
+.close-modal::after {
+  /* this is the 'X' arrow */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2px;
+  width: 24px;
+  background: #FFF;
+}
+
+.close-modal::before {
+  transform: translate(-50%) rotate(45deg);
+}
+
+.close-modal::after {
+  transform: translate(-50%) rotate(-45deg);
+}
+
+.close-modal:hover {
+  background: #182C7B;
+}
+
+/* -------------------------------- 
+ *
+ * Modal Trigger and morphing background
+ *
+ * -------------------------------- */
+
+.morph-btn,
+.morph-background {
+  display: inline-block;
+  font-family: 'Red Hat Text';
+  text-align: center;
+  background-color: #E7F4FF;
+  height: auto;
+  font-size: 18px;
+  line-height: normal;
+  width: auto;
+  padding: 15px 25px;
+}
+
+.morph-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  color: #2845B8;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 1;
+  border-radius: 40px;
+}
+
+.morph-btn svg {
+  margin-left: 0.4em;
+}
+
+.morph-background {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+@media screen and (max-width: 1199px) {
+  .modal-content {
+    padding: 25% 10%;
+  }
+}
+
+/* END POPUP MODAL */
+
+
+/* SUPPLEMENT FACTS LABEL */
+
+@media only screen and (min-width: 768px) {
+	.supp-facts-single .supp-facts-ada {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.supp-facts-single .supp-facts-ada {
+		width: 33%;
+	}
+}
+
+.supp-facts-single .supp-facts-ada {
+	margin-top: 20px;
+	margin-bottom: 60px;
+}
+
+/*.supp-facts-single p {
+	margin-top: -20px;
+}*/
+
+.supp-facts-single .FDA-statement {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.supp-facts-ada-flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+.supp-facts-ada .efs-kit {
+	width: 30%;
+}
+
+.supp-facts-ada {
+	font-size: medium;
+	line-height: 1.2;
+	font-family: Open Sans, Verdana, sans-serif;
+  max-width: 480px;
+}
+
+.supp-facts-ada-top {
+	margin: 0px 0px 5px 0px;
+	padding: 0 0.5rem;
+}
+
+.supp-facts-ada-border {
+	border: 2px solid #14161D;
+	margin: 0;
+	float: none;
+	width: auto;
+	padding: 0.5rem;
+	background: transparent;
+}
+
+.supp-facts-ada-header {
+	border-bottom: 10px solid #14161D;
+	padding: 0 0 0.25rem 0;
+	margin: 0 0 0.5rem 0;
+}
+
+.supp-facts-ada-title {
+	font-weight: bold;
+	font-family: Open Sans, Arial #14161D, Arial, Verdana, sans-serif;
+	font-size: 2.3rem !important;
+	margin: 0 0 0.25rem 0;
+	color: #14161D;
+}
+
+.supp-facts-ada p {
+	text-align: left;
+	padding: 0 !important;
+	margin-bottom: 5px;
+	color: #14161D;
+	font-family: Open Sans, Verdana, sans-serif;
+}
+
+.supp-facts-ada-indent {
+	font-weight: 400;
+	margin-left: 20px;
+	margin-bottom: 0px;
+}
+
+.supp-facts-no-indent {
+	margin: 0;
+}
+
+.supp-facts-regular-font-weight {
+	font-weight: 400;
+}
+
+.supp-facts-ada-border table {
+	border-collapse: collapse;
+}
+
+.supp-facts-ada-table {
+	width: 100% !important;
+	border: 0 !important;
+	margin: 0 !important;
+}
+
+table {
+	border-spacing: 0;
+}
+
+table td, table th {
+	border: none;
+}
+
+thead {
+	display: table-header-group;
+	vertical-align: middle;
+	unicode-bidi: isolate;
+	border-color: inherit;
+}
+
+.supp-facts-ada-thin-line {
+	border-bottom: 6px solid #14161D;
+}
+
+.supp-facts-ada-table thead tr th, .supp-facts-ada-table thead tr td {
+	border: 0 !important;
+}
+
+.supp-facts-ada tr td:nth-child(2) {
+	width: 20%;
+	padding: 0.25rem 0 !important;
+	border-top: 1px solid #14161D;
+	text-align: right;
+}
+
+.supp-facts-ada tr td:nth-child(3) {
+	text-align: right;
+	width: 20% !important;
+	padding: 0.25rem 0 !important;
+	border-top: 1px solid #14161D;
+}
+
+tbody {
+	display: table-row-group;
+	vertical-align: middle;
+	unicode-bidi: isolate;
+	border-color: inherit;
+	background: transparent;
+}
+
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	unicode-bidi: isolate;
+	border-color: inherit;
+}
+
+.supp-facts-ada tr th {
+	width: 60%;
+	text-align: left;
+	padding: 0.25rem 0 !important;
+	padding-right: 4% !important;
+	border-top: 1px solid #14161D;
+}
+
+table tbody>tr:nth-child(odd)>th {
+	background: transparent;
+}
+
+table tbody>tr:nth-child(odd)>td {
+	background: transparent;
+}
+
+table tbody tr:hover>th {
+	background-color: transparent;
+}
+
+table tbody tr:hover>td {
+	background-color: transparent;
+}
+
+/* END SUPPLEMENT FACTS LABEL */

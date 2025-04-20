@@ -1,0 +1,168 @@
+/* POPUP MODAL */
+
+/* hide the scrollbar and prevent scrolling */
+body.modal-open {
+    overflow: hidden;
+  }
+  
+  /* Base paragraph styles */
+  p.modal-content-text {
+    margin: 4em auto;
+    font-size: 16px;
+    line-height: 24px;
+    color: #13161D;
+    font-family: 'Red Hat Text';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  @media only screen and (min-width: 768px) {
+  p.modal-content-text {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+  
+  /* -------------------------------- 
+   *
+   * Modal Window
+   *
+   * -------------------------------- */
+  
+  .morph-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    color: white;
+    z-index: 2000;
+  }
+  
+  .morph-modal.open-modal {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2000;
+  }
+  
+  .modal-content,
+  .close-modal {
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 2;
+  }
+  
+  .modal-visible .modal-content,
+  .modal-visible .close-modal {
+    opacity: 1;
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    position: relative;
+    overflow: auto;
+    padding: 10%;
+    color: #14161D;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    /* replace text with image */
+    height: 56px;
+    width: 56px;
+    background: #2945B8;
+    border-radius: 50%;
+    border: none;
+    text-indent: 100%;
+    overflow: hidden;
+    color: transparent;
+    white-space: nowrap;
+    transition: background 0.2s;
+    z-index: 3;
+  }
+  
+  .close-modal::before,
+  .close-modal::after {
+    /* this is the 'X' arrow */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 2px;
+    width: 24px;
+    background: #FFF;
+  }
+  
+  .close-modal::before {
+    transform: translate(-50%) rotate(45deg);
+  }
+  
+  .close-modal::after {
+    transform: translate(-50%) rotate(-45deg);
+  }
+  
+  .close-modal:hover {
+    background: #182C7B;
+  }
+  
+  /* -------------------------------- 
+   *
+   * Modal Trigger and morphing background
+   *
+   * -------------------------------- */
+  
+  .morph-btn,
+  .morph-background {
+    display: inline-block;
+    font-family: 'Red Hat Text';
+    text-align: center;
+    background-color: #E7F4FF;
+    height: auto;
+    font-size: 18px;
+    line-height: normal;
+    width: auto;
+    padding: 15px 25px;
+  }
+  
+  .morph-btn {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    color: #2845B8;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 1;
+    border-radius: 40px;
+  }
+  
+  .morph-btn svg {
+    margin-left: 0.4em;
+  }
+  
+  .morph-background {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s;
+  }
+  
+  @media screen and (max-width: 1199px) {
+    .modal-content {
+      padding: 25% 10%;
+    }
+  }
+  
+  /* END POPUP MODAL */
