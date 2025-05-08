@@ -163,12 +163,15 @@ p.modal-content-text {
   display: flex;
   flex-direction: column;
   align-items: start;
-  max-height: calc(100vh - 40px);
+  max-height: none !important;
   overflow-y: auto;
   position: relative;
-  overflow: auto;
-  padding: 10%;
+  overflow: visible !important;
+  transform-origin: center center;
+  transition: transform 0.2s;
+  padding: 60px 20px;
   color: #14161D;
+  background-color: #fff;
 }
 
 .close-modal {
@@ -255,12 +258,7 @@ p.modal-content-text {
   top: 0;
   left: 0;
   transition: transform 0.3s;
-}
-
-@media screen and (max-width: 1199px) {
-  .modal-content {
-    padding: 25% 10%;
-  }
+  background-color: rgba(0,0,0,.8);
 }
 
 /* END POPUP MODAL */
@@ -451,3 +449,58 @@ table tbody tr:hover>td {
 }
 
 /* END SUPPLEMENT FACTS LABEL */
+
+
+/* START SWIPER SLIDER */
+
+/* .swiper-slider-product-gallery .swiper-button-prev { left: 0; }
+.swiper-slider-product-gallery .swiper-button-next { right: 0; } */
+.swiper-slider-product-gallery .swiper-button-prev, .swiper-slider-product-gallery .swiper-button-next { 
+    background-color: #0000004D;
+    border-radius: 20px;
+    padding: 20px;
+    aspect-ratio: 1;
+    transition: all 200ms;
+}
+.swiper-slider-product-gallery .swiper-button-prev:after { color: #fff; font-size: 24px; }
+.swiper-slider-product-gallery .swiper-button-next:after { color: #fff; font-size: 24px; }
+
+.swiper-container-product-thumbs {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right:0;
+    max-width: 190px;
+    width: 100%;
+}
+ .swiper-container-product-thumbs swiper-slide {
+    opacity: 0.5;
+    border-radius: 16px;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+.swiper-container-product-thumbs swiper-slide figure {
+    display: block;
+    height: 100%;
+    width: 100%
+}
+
+.swiper-container-product-thumbs swiper-slide figure img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-container-product-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+    border: 3px solid #fff;
+}
+
+
+.swiper-slider-biotic swiper-container { width: calc(100% - 60px); }
+.swiper-slider-biotic .swiper-button-prev { left: 0; }
+.swiper-slider-biotic .swiper-button-next { right: 0; }
+.swiper-slider-biotic .swiper-button-prev:after { color: black; font-size: 24px; }
+.swiper-slider-biotic .swiper-button-next:after { color: black; font-size: 24px; }
+
+/* END SWIPER SLIDER */
