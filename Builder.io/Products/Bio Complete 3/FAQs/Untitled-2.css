@@ -1,0 +1,104 @@
+/* BLUE HEADER (TOP) */
+.hide-vwo {
+    display: none !important;
+    visibility: hidden !important;
+    -webkit-visibility: hidden !important; /* Safari compatibility */
+}
+.hide-vwo-header2025 {
+    display: none !important;
+    visibility: hidden !important;
+    -webkit-visibility: hidden !important; /* Safari compatibility */
+}
+.elementor-element-5fc931b, .elementor-element-355b60b, .elementor-element-e04dd56, .banner-bc3 {
+    margin-top: 130px !important;
+}
+.show-vwo-blue-banner-v1 {
+    display: block !important;
+}
+.ghm-logged-in .blue-banner-wrapper {
+    display: none !important;
+}
+.ghm-logged-in .elementor-element-5fc931b, .ghm-logged-in .elementor-element-355b60b, .ghm-logged-in .elementor-element-e04dd56, .ghm-logged-in .banner-bc3 {
+    margin-top: 0px !important;
+}
+
+
+/* GREEN HEADER (TOP) */
+.hide-vwo {
+    display: none !important;
+    visibility: hidden !important;
+    -webkit-visibility: hidden !important; /* Safari compatibility */
+}
+.hide-vwo-header2025 {
+    display: none !important;
+    visibility: hidden !important;
+    -webkit-visibility: hidden !important; /* Safari compatibility */
+}
+.elementor-element-5fc931b, .elementor-element-355b60b, .elementor-element-e04dd56, .banner-bc3 {
+    margin-top: 130px !important;
+}
+.show-vwo-green-banner-v1 {
+    display: block !important;
+}
+.ghm-logged-in .green-banner-wrapper {
+    display: none !important;
+}
+.ghm-logged-in .elementor-element-5fc931b, .ghm-logged-in .elementor-element-355b60b, .ghm-logged-in .elementor-element-e04dd56, .ghm-logged-in .banner-bc3 {
+    margin-top: 0px !important;
+}
+
+
+/* BLUE FOOTER (BOTTOM) */
+/* EDITELEMENT */
+vwo_$("#five9OpenChatButton").vwoCss({"margin-bottom":"140px"});
+/* EDITELEMENT */
+vwo_$(".elementor-element-5b392097").vwoCss({"padding-bottom":"190px !important"});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var closeButton = document.querySelector('.close-banner-blue-v2'); // Close button
+    var targetElement = document.querySelector('#five9OpenChatButton'); // Target element
+    if (closeButton && targetElement) {
+        closeButton.addEventListener('click', function() {
+            // Set bottom margin for #five9OpenChatButton to 20px with !important
+            targetElement.style.setProperty('margin-bottom', '-120px', 'important');
+            console.log('Bottom margin of #five9OpenChatButton set to 20px.');
+        });
+    } else {
+        console.log('Close button or target element not found.');
+    }
+});
+
+.show-vwo-blue-banner-v2 {
+    display: block !important;
+}
+.ghm-logged-in .show-vwo-blue-banner-v2 {
+    display: none !important;
+}
+
+
+/* GREEN FOOTER (BOTTOM) */
+/* EDITELEMENT */
+vwo_$("#five9OpenChatButton").vwoCss({"margin-bottom":"140px"});
+/* CONTENT */
+vwo_$("body > footer:nth-of-type(1) > section:nth-of-type(8) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1) > span:nth-of-type(1)").replaceWith(`<span vwo-el-id=\"42724253830\">60% off</span>`);
+
+document.addEventListener('DOMContentLoaded', function() {
+    var closeButton = document.querySelector('.close-banner-green-v2'); // Close button
+    var targetElement = document.querySelector('#five9OpenChatButton'); // Target element
+    if (closeButton && targetElement) {
+        closeButton.addEventListener('click', function() {
+            // Set bottom margin for #five9OpenChatButton to 20px with !important
+            targetElement.style.setProperty('margin-bottom', '-120px', 'important');
+            console.log('Bottom margin of #five9OpenChatButton set to 20px.');
+        });
+    } else {
+        console.log('Close button or target element not found.');
+    }
+});
+
+.show-vwo-green-banner-v2 {
+    display: block !important;
+}
+.ghm-logged-in .show-vwo-green-banner-v2 {
+    display: none !important;
+}
