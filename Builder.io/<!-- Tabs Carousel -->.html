@@ -1,0 +1,314 @@
+<div class="tabs-carousel" id="tabs1">
+  <div class="tc-track" role="tablist" aria-label="Products">
+    <!-- Slide 1 — Bio Complete 3 -->
+    <button class="tc-slide is-active"
+            data-show="#bioBanner, .BC3Slide, .bc3-reviews-box"
+            data-hide="#energyBanner, .MCTSlide, .PolyphenolSlide, .OliveOilSlide, .TotalRestoreSlide, .mct-reviews-box, .pdsd-reviews-box, .proi-reviews-box, .tr-reviews-box">
+      <img class="tc-thumb"
+           src="https://cdn.builder.io/api/v1/image/assets%2Fcf992cf7343c4ca182a884e9a45f394e%2F31ae68e1742043438430e209ebfe13a8"
+           alt="Bio Complete 3"
+           loading="lazy" decoding="async" />
+      <span class="tc-label">Bio Complete 3</span>
+    </button>
+
+    <!-- Slide 2 — MCT Wellness -->
+    <button class="tc-slide"
+            data-show="#energyBanner, .MCTSlide, .mct-reviews-box"
+            data-hide="#bioBanner, .BC3Slide, .PolyphenolSlide, .OliveOilSlide, .TotalRestoreSlide, .bc3-reviews-box, .pdsd-reviews-box, .proi-reviews-box, .tr-reviews-box">
+      <img class="tc-thumb"
+           src="https://cdn.builder.io/api/v1/image/assets%2Fcf992cf7343c4ca182a884e9a45f394e%2F82085d2e94b9412f8ebb44f657b0cc35"
+           alt="MCT Wellness"
+           loading="lazy" decoding="async" />
+      <span class="tc-label">MCT Wellness</span>
+    </button>
+
+    <!-- Slide 3 — Polyphenol Dark Spot Diminisher -->
+    <button class="tc-slide"
+            data-show="#energyBanner, .PolyphenolSlide, .pdsd-reviews-box"
+            data-hide="#bioBanner, .BC3Slide, .MCTSlide, .OliveOilSlide, .TotalRestoreSlide, .bc3-reviews-box, .mct-reviews-box, .proi-reviews-box, .tr-reviews-box">
+      <img class="tc-thumb"
+           src="https://cdn.builder.io/api/v1/image/assets%2Fcf992cf7343c4ca182a884e9a45f394e%2Fb223b076176043178cbcd209d30478a0"
+           alt="Polyphenol Dark Spot Diminisher"
+           loading="lazy" decoding="async" />
+      <span class="tc-label">Polyphenol Dark Spot Diminisher</span>
+    </button>
+
+    <!-- Slide 4 — Polyphenol-Rich Olive Oil -->
+    <button class="tc-slide"
+            data-show="#energyBanner, .OliveOilSlide, .proi-reviews-box"
+            data-hide="#bioBanner, .BC3Slide, .MCTSlide, .PolyphenolSlide, .TotalRestoreSlide, .bc3-reviews-box, .mct-reviews-box, .pdsd-reviews-box, .tr-reviews-box">
+      <img class="tc-thumb"
+           src="https://cdn.builder.io/api/v1/image/assets%2Fcf992cf7343c4ca182a884e9a45f394e%2F38e14e8280804af88ed2294dc0c44959"
+           alt="Polyphenol-Rich Olive Oil"
+           loading="lazy" decoding="async" />
+      <span class="tc-label">Polyphenol-Rich Olive Oil</span>
+    </button>
+
+    <!-- Slide 5 — Total Restore -->
+    <button class="tc-slide"
+            data-show="#energyBanner, .TotalRestoreSlide, .tr-reviews-box"
+            data-hide="#bioBanner, .BC3Slide, .MCTSlide, .PolyphenolSlide, .OliveOilSlide, .bc3-reviews-box, .mct-reviews-box, .pdsd-reviews-box, .proi-reviews-box">
+      <img class="tc-thumb"
+           src="https://cdn.builder.io/api/v1/image/assets%2Fcf992cf7343c4ca182a884e9a45f394e%2F064f14f17fb14bcd961bc737ea0923d0"
+           alt="Total Restore"
+           loading="lazy" decoding="async" />
+      <span class="tc-label">Total Restore</span>
+    </button>
+  </div>
+</div>
+
+<style>
+/* ===========================
+   Tabs Carousel — Grid Layout (no arrows)
+   =========================== */
+
+.tabs-carousel {
+  --cols: 5;
+  --gap: 24px;
+  --thumb-size: 96px;
+  display: block;
+}
+
+/* gap tuning by breakpoint */
+@media (max-width: 1024px) {
+  .tabs-carousel { --gap: 16px; }
+}
+@media (max-width: 640px) {
+  .tabs-carousel { --gap: 12px; }
+}
+
+/* items per view by breakpoint */
+@media (max-width: 1024px) {
+  .tabs-carousel { --cols: 3; }
+}
+@media (max-width: 640px) {
+  .tabs-carousel { --cols: 1; }
+}
+
+/* Track uses CSS Grid, flowing horizontally like a filmstrip */
+.tc-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100% / var(--cols));
+  gap: var(--gap);
+
+  overflow-x: auto;
+  /* do NOT set scroll-snap-type here; we set it per-instance below */
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+
+  /* hide scrollbar, keep scroll/drag */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0px 30px;
+}
+.tc-track::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Per-instance track tuning (consistent block formatting) */
+#tabs1 .tc-track {
+  overflow-y: visible;
+  scroll-snap-type: x proximity;
+}
+
+/* Tile */
+.tc-slide {
+  scroll-snap-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* keep image size stable if we add a border */
+#tabs1 .tc-thumb {
+  box-sizing: border-box;
+}
+
+/* solid blue ring drawn INSIDE the image box (no clipping) */
+#tabs1 .tc-slide.is-active .tc-thumb {
+  border: 4px solid #1f3aa0;
+  box-shadow: none;
+  border-radius: 40px;
+}
+
+/* Image fills its tile */
+.tc-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 40px;
+}
+
+/* Label below image */
+.tc-label {
+  margin-top: 14px;
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+  font-weight: 600;
+  color: #1f3aa0;
+}
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('tabs1'); // change per instance
+  if (!root) return;
+
+  const track = root.querySelector('.tc-track');
+
+  // OPTIONAL config per original slide index (0..N-1).
+  // Leave {} to use data attributes (data-show / data-hide).
+  const VIS = {};
+
+  // Capture originals and tag with a stable index
+  const originals = [...track.querySelectorAll('.tc-slide')];
+  originals.forEach((el, i) => { el.dataset.idx = i; });
+
+  const N = originals.length;
+  if (!N) return;
+
+  // Make it infinite: clone one full set to each side
+  const leftClones  = originals.map(el => el.cloneNode(true));
+  const rightClones = originals.map(el => el.cloneNode(true));
+  leftClones.forEach(c => c.classList.add('is-clone'));
+  rightClones.forEach(c => c.classList.add('is-clone'));
+  leftClones.slice().reverse().forEach(c => track.insertBefore(c, track.firstChild));
+  rightClones.forEach(c => track.appendChild(c));
+
+  // Working list after cloning
+  let slides = [...track.querySelectorAll('.tc-slide')];
+
+  // ---------- Visibility helpers ----------
+  // Collect all selectors ever referenced in data-show across originals
+  const ALL_SHOW = new Set();
+  originals.forEach(s => {
+    const list = (s.getAttribute('data-show') || '')
+      .split(',')
+      .map(x => x.trim())
+      .filter(Boolean);
+    list.forEach(sel => ALL_SHOW.add(sel));
+  });
+
+  function setDisplay(selectors, display) {
+    (selectors || []).forEach(sel => {
+      try {
+        document.querySelectorAll(sel).forEach(el => { el.style.display = display; });
+      } catch (_) { /* ignore invalid selectors */ }
+    });
+  }
+
+  function parseList(str) {
+    return (str || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
+
+  function applyVisibility(origIdx) {
+    // VIS config takes precedence
+    const cfg = VIS[origIdx];
+    if (cfg) {
+      setDisplay([...ALL_SHOW], 'none');   // reset everything that may be shown
+      setDisplay(cfg.hide || [], 'none');  // hide explicit
+      setDisplay(cfg.show || [], 'block'); // show explicit (switch to 'flex' if needed)
+      return;
+    }
+
+    // Fallback: use data attributes on the ORIGINAL slide
+    const original = originals[origIdx];
+    const showList = parseList(original.getAttribute('data-show'));
+    const hideList = parseList(original.getAttribute('data-hide'));
+
+    setDisplay([...ALL_SHOW], 'none');  // reset shared showables
+    setDisplay(hideList, 'none');       // hide explicit
+    setDisplay(showList, 'block');      // show explicit
+  }
+  // ---------------------------------------
+
+  // Active indices
+  let workingIndex = N; // position inside slides[]
+  let activeIdx = Math.max(0, originals.findIndex(el => el.classList.contains('is-active')));
+  if (activeIdx < 0) activeIdx = 0;
+
+  function centerTo(index, smooth = true) {
+    const s = slides[index];
+    if (!s) return;
+    const centerLeft = s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2;
+    track.scrollTo({ left: centerLeft, behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  function setActiveByOriginal(origIdx, smooth = true) {
+    // Normalize 0..N-1
+    activeIdx = ((origIdx % N) + N) % N;
+
+    // The middle band’s copy of that slide is offset by +N
+    workingIndex = N + activeIdx;
+
+    // Mark active on any copy (original or clone) with matching data-idx
+    slides.forEach(el => {
+      el.classList.toggle('is-active', +el.dataset.idx === activeIdx);
+    });
+
+    // Apply caller’s visibility rules
+    applyVisibility(activeIdx);
+
+    // Center chosen slide
+    centerTo(workingIndex, smooth);
+
+    // After animation, jump back to middle band to preserve the infinite illusion
+    clearTimeout(setActiveByOriginal._t);
+    setActiveByOriginal._t = setTimeout(() => {
+      slides = [...track.querySelectorAll('.tc-slide')];
+      workingIndex = N + activeIdx;
+      centerTo(workingIndex, false);
+    }, smooth ? 320 : 0);
+  }
+
+  // Click: any slide (original or clone)
+  track.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tc-slide');
+    if (!btn) return;
+    setActiveByOriginal(+btn.dataset.idx, true);
+  });
+
+  // Snap on manual scroll/drag
+  let snapTimer;
+  track.addEventListener('scroll', () => {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      slides = [...track.querySelectorAll('.tc-slide')];
+      const centerX = track.scrollLeft + track.clientWidth / 2;
+      let nearest = 0, best = Infinity;
+
+      slides.forEach((s, i) => {
+        const mid = s.offsetLeft + s.offsetWidth / 2;
+        const d = Math.abs(mid - centerX);
+        if (d < best) { best = d; nearest = i; }
+      });
+
+      setActiveByOriginal(+slides[nearest].dataset.idx, true);
+    }, 80);
+  }, { passive: true });
+
+  // Keep centering on resize (layout shifts)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => centerTo(N + activeIdx, false), 100);
+  });
+
+  // Init
+  setActiveByOriginal(activeIdx, false);
+})();
+</script>
